@@ -59,7 +59,7 @@ router.get("/:_id/logs", async (request, response) => {
     return {
       description: x.description,
       duration: x.duration,
-      date: x.date.toDateString(),
+      date: new Date(x.date).toDateString(),
     };
   });
   const formattedRes = {
