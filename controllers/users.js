@@ -62,6 +62,7 @@ router.get("/:_id/logs", async (request, response) => {
       date: new Date(x.date).toDateString(),
     };
   });
+  console.log("formattedExercises", formattedExercises);
   const formattedRes = {
     _id: user._id,
     username: user.username,
