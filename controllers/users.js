@@ -19,10 +19,17 @@ router.post("/:_id/exercises", async (request, response) => {
     ...request.body,
     user_id: request.params._id,
   };
+  const user = await User.findById(request.params._id);
   delete exercise._id;
   const createdExercise = new Exercise(exercise);
-  const savedExercise = await createdExercise.save();
-  response.status(201).json(savedExercise);
+  await createdExercise.save();
+  response.status(201).json({
+    username: user.username,
+    _id: user._id,
+    description: request.body.description,
+    date: new Date(request.body.date).toDateString(),
+    duration: +request.body.duration,
+  });
 });
 
 router.get("/:_id/logs", async (request, response) => {
